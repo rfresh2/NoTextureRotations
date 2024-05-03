@@ -33,3 +33,5 @@ This mod can either:
 
 I generally prefer the secure implementation as it will retain the normal visual feel of the game. 
 
+It is also possible to prevent rotations using a resource pack like this: https://modrinth.com/resourcepack/no-more-alternate-blocks
+
