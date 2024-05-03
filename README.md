@@ -16,7 +16,7 @@
 
 A Fabric mod that prevents Minecraft coordinate exploits based on texture rotation and position offsets.
 
-Compatible with Sodium and vanilla
+Compatible with Vanilla MC, Sodium, and custom texture/resource packs
 
 ## What's the exploit?
 
