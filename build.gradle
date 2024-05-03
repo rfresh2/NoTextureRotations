@@ -12,6 +12,14 @@ base {
 
 repositories {
 	maven {
+		name = 'Fabric'
+		url = 'https://maven.fabricmc.net/'
+	}
+	maven {
+		name = "Parchment"
+		url = "https://maven.parchmentmc.org"
+	}
+	maven {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
 	}
