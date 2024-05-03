@@ -1,5 +1,19 @@
 # NoTextureRotations
 
+<p align="center">
+  <a href="https://discord.gg/nJZrSaRKtb">
+  <img alt="Discord" src="https://dcbadge.vercel.app/api/server/nJZrSaRKtb">
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/MC-1.20.6-brightgreen.svg" alt="Minecraft"/>
+  <img src="https://img.shields.io/badge/MC-1.20.4-brightgreen.svg" alt="Minecraft"/>
+  <img src="https://img.shields.io/badge/MC-1.20.2-brightgreen.svg" alt="Minecraft"/>
+  <img src="https://img.shields.io/badge/MC-1.20.1-brightgreen.svg" alt="Minecraft"/>
+</p>
+
+
 A Fabric mod that prevents Minecraft coordinate exploits based on texture rotation and position offsets.
 
 Compatible with Sodium and vanilla
