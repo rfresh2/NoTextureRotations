@@ -37,7 +37,7 @@ Any screenshots or videos that show examples of these blocks are susceptible to 
 On anarchy servers, this can be particularly powerful - leading to bases with images or videos shared being found.
 
 This is not a new discovery, and the method has been known since at least before 2018 and is still regularly used today
-in reversing panorma seeds. Example: https://www.youtube.com/watch?v=gw9oLFTHXqw 
+in reversing panorma seeds. Example: https://youtu.be/gE1dMNCyofs?t=57 
 
 There are multiple public tools to perform this:
  * https://github.com/19MisterX98/TextureRotations
