@@ -24,6 +24,10 @@ Many blocks like grass, dirt, and stone have *variations* that rotate or change 
 
 Texture variants are not inherently bad, they make the game visually more interesting as they prevent blocks from looking "same-y" when many are next to each other.
 
+<p align="center">
+  <img src=".github/example-texture-rotation.png" alt="Example"/>
+</p>
+
 The problem is that the "random" number used to select the variant is seeded by the block's position in-game. No world seed is required.
 
 Offsets works similarly, some blocks like flowers offset their position from the center of the block with a "random" offset.
