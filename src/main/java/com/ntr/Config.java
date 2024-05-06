@@ -43,7 +43,7 @@ public class Config {
     @AutoGen(category = mainCategory)
     @EnumCycler
     @CustomDescription("Configures if rotations/offsets are fully cancelled or replaced with a secure random implementation.")
-    public final Mode mode = Mode.NO_ROTATIONS;
+    public Mode mode = Mode.NO_ROTATIONS;
 
     public enum Mode {
         NO_ROTATIONS, SECURE_RANDOM;
