@@ -9,11 +9,11 @@ import java.util.function.Supplier;
 
 public class NoTextureRotations implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("NoTextureRotations");
-	public static Supplier<Config> config = () -> Config.HANDLER.instance();
+	public static Supplier<Config> config = () -> Config.configInstance.getConfig();
 	public static SecureRandom secureRandom = new SecureRandom();
 
 	@Override
 	public void onInitializeClient() {
-		Config.HANDLER.load();
+		Config.configInstance.load();
 	}
 }

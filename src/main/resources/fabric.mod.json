@@ -27,6 +27,6 @@
 	"depends": {
 		"fabricloader": ">=0.15",
 		"fabric-api": "*",
-		"yet_another_config_lib_v3": "*"
+		"yet-another-config-lib": "*"
 	}
 }

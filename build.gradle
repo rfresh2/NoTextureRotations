@@ -2,7 +2,7 @@ plugins {
 	id 'fabric-loom' version '1.6-SNAPSHOT'
 }
 
-version = "${project.mod_version}+1.20.x"
+version = "${project.mod_version}+1.19.x"
 group = project.maven_group
 
 base {
@@ -37,9 +37,11 @@ dependencies {
 	}
 	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
-	modImplementation("dev.isxander:yet-another-config-lib:${project.yacl_version}+${project.minecraft_version}-fabric")
+	modImplementation("dev.isxander:yet-another-config-lib:${project.yacl_version}")
 	modImplementation("maven.modrinth:modmenu:${project.modmenu_version}")
-	modImplementation("maven.modrinth:sodium:mc${project.minecraft_version}-${project.sodium_version}")
+	// causes runClient to crash on loading world :/
+	// works in prod tho so idk
+//	modImplementation("maven.modrinth:sodium:mc${project.minecraft_version}-${project.sodium_version}")
 }
 
 processResources {

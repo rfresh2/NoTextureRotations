@@ -1,51 +1,83 @@
 package com.ntr;
 
 import com.google.gson.GsonBuilder;
-import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
-import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
-import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
-import dev.isxander.yacl3.config.v2.api.autogen.CustomDescription;
-import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
-import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import dev.isxander.yacl.api.ConfigCategory;
+import dev.isxander.yacl.api.Option;
+import dev.isxander.yacl.api.YetAnotherConfigLib;
+import dev.isxander.yacl.config.ConfigEntry;
+import dev.isxander.yacl.config.GsonConfigInstance;
+import dev.isxander.yacl.gui.controllers.BooleanController;
+import dev.isxander.yacl.gui.controllers.cycling.EnumController;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.OptionEnum;
 
 public class Config {
-    public static ConfigClassHandler<Config> HANDLER = ConfigClassHandler.<Config>createBuilder(Config.class)
-        .id(new ResourceLocation("ntr", "config"))
-        .serializer(config -> GsonConfigSerializerBuilder.create(config)
-            .setPath(FabricLoader.getInstance().getConfigDir().resolve("no-texture-rotations.json"))
-            .appendGsonBuilder(GsonBuilder::setPrettyPrinting)
-            .build())
-        .build();
+    public static GsonConfigInstance<Config> configInstance = new GsonConfigInstance<>(
+        Config.class,
+        FabricLoader.getInstance().getConfigDir().resolve("no-texture-rotations.json"),
+        GsonBuilder::setPrettyPrinting
+    );
 
-    private static final String mainCategory = "Settings";
+    public static Screen getConfigScreen(Screen parentScreen) {
+        return YetAnotherConfigLib.create(configInstance, (defaults, config, builder) -> builder
+            .title(Component.literal("NoTextureRotations"))
+            .category(ConfigCategory.createBuilder()
+                          .name(Component.translatable("yacl3.config.ntr:config.category.Settings"))
+                          .option(Option.createBuilder(Boolean.class)
+                                      .name(Component.translatable("yacl3.config.ntr:config.enabled"))
+                                      .binding(true, () -> config.enabled, v -> config.enabled = v)
+                                      .controller(BooleanController::new)
+                                      .build())
+                          .option(Option.createBuilder(Boolean.class)
+                                      .name(Component.translatable("yacl3.config.ntr:config.disableTextureRotations"))
+                                      .binding(true, () -> config.disableTextureRotations, v -> config.disableTextureRotations = v)
+                                      .controller(BooleanController::new)
+                                      .build())
+                          .option(Option.createBuilder(Boolean.class)
+                                      .name(Component.translatable("yacl3.config.ntr:config.disableOffsets"))
+                                      .binding(true, () -> config.disableOffsets, v -> config.disableOffsets = v)
+                                      .controller(BooleanController::new)
+                                      .build())
+                          .option(Option.createBuilder(Mode.class)
+                                      .name(Component.translatable("yacl3.config.ntr:config.mode"))
+                                      .binding(Mode.NO_ROTATIONS, () -> config.mode, v -> config.mode = v)
+                                      .controller(EnumController::new)
+                                      .build())
+                          .build())
+            ).generateScreen(parentScreen);
+    }
 
-    @SerialEntry
-    @AutoGen(category = mainCategory)
-    @Boolean
+    @ConfigEntry
     public boolean enabled = true;
 
-    @SerialEntry
-    @AutoGen(category = mainCategory)
-    @Boolean
-    @CustomDescription("Disables texture rotations based on their position")
+    @ConfigEntry
     public boolean disableTextureRotations = true;
 
-    @SerialEntry
-    @AutoGen(category = mainCategory)
-    @Boolean
-    @CustomDescription("Disables blocks like flowers position being offset based on their position")
+    @ConfigEntry
     public boolean disableOffsets = true;
 
-    @SerialEntry
-    @AutoGen(category = mainCategory)
-    @EnumCycler
-    @CustomDescription("Configures if rotations/offsets are fully cancelled or replaced with a secure random implementation.")
-    public final Mode mode = Mode.NO_ROTATIONS;
+    @ConfigEntry
+    public Mode mode = Mode.NO_ROTATIONS;
 
-    public enum Mode {
-        NO_ROTATIONS, SECURE_RANDOM;
+    public enum Mode implements OptionEnum {
+        NO_ROTATIONS("yacl3.config.enum.Mode.no_rotations"), SECURE_RANDOM("yacl3.config.enum.Mode.secure_random");
+
+        private final String translateKey;
+
+        Mode(final String translateKey) {
+            this.translateKey = translateKey;
+        }
+
+        @Override
+        public int getId() {
+            return ordinal();
+        }
+
+        @Override
+        public String getKey() {
+            return translateKey;
+        }
     }
 }
