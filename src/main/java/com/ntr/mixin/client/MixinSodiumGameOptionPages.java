@@ -2,12 +2,14 @@ package com.ntr.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.ntr.NoTextureRotations;
+import com.ntr.config.Config;
 import com.ntr.config.SodiumOptionStorage;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
 import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.options.binding.GenericBinding;
+import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,7 +38,6 @@ public class MixinSodiumGameOptionPages {
                                     .setBinding(new GenericBinding<>(
                                         (config, value) -> config.disableTextureRotations = value,
                                         config -> config.disableTextureRotations))
-                                    .setEnabled(NoTextureRotations.config.getConfig().enabled)
                                     .build())
                            .add(OptionImpl.createBuilder(Boolean.TYPE, SodiumOptionStorage.INSTANCE)
                                     .setName(Component.translatable("yacl3.config.ntr:config.disableOffsets"))
@@ -45,7 +46,17 @@ public class MixinSodiumGameOptionPages {
                                     .setBinding(new GenericBinding<>(
                                         (config, value) -> config.disableOffsets = value,
                                         config -> config.disableOffsets))
-                                    .setEnabled(NoTextureRotations.config.getConfig().enabled)
+                                    .build())
+                           .add(OptionImpl.createBuilder(Config.Mode.class, SodiumOptionStorage.INSTANCE)
+                                    .setName(Component.translatable("yacl3.config.ntr:config.mode"))
+                                    .setTooltip(Component.translatable("yacl3.config.ntr:config.mode.description"))
+                                    .setControl(o -> new CyclingControl<Config.Mode>(o, Config.Mode.class, new Component[]{
+                                        Component.translatable("yacl3.config.enum.Mode.no_rotations"),
+                                        Component.translatable("yacl3.config.enum.Mode.secure_random")
+                                    }))
+                                    .setBinding(new GenericBinding<>(
+                                        (config, value) -> config.mode = value,
+                                        config -> config.mode))
                                     .build())
                            .build());
         } catch (final Throwable e) {

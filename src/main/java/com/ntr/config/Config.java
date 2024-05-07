@@ -12,11 +12,6 @@ public class Config {
     @SerialEntry
     @AutoGen(category = mainCategory)
     @Boolean
-    public boolean enabled = true;
-
-    @SerialEntry
-    @AutoGen(category = mainCategory)
-    @Boolean
     @CustomDescription("yacl3.config.ntr:config.disableTextureRotations.description")
     public boolean disableTextureRotations = true;
 

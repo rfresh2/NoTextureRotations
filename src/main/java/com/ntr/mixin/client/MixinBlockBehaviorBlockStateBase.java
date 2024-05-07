@@ -20,7 +20,7 @@ public abstract class MixinBlockBehaviorBlockStateBase {
     public void disableOffsetBasedOnPos(final BlockGetter level, final BlockPos pos, final CallbackInfoReturnable<Vec3> cir,
                                         @Local(argsOnly = true) LocalRef<BlockPos> posRef) {
         var config = NoTextureRotations.config.getConfig();
-        if (config.enabled && config.disableOffsets) {
+        if (config.disableOffsets) {
             switch (config.mode) {
                 case NO_ROTATIONS -> cir.setReturnValue(Vec3.ZERO);
                 case SECURE_RANDOM -> posRef.set(BlockPos.of(NoTextureRotations.secureRandom.nextLong()));

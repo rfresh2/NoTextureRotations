@@ -15,7 +15,7 @@ public class MixinBlockBehavior {
     @Inject(method = "getSeed", at = @At("HEAD"), cancellable = true)
     public void disableSeedBasedOnPosition(final BlockState state, final BlockPos pos, final CallbackInfoReturnable<Long> cir) {
         var config = NoTextureRotations.config.getConfig();
-        if (config.enabled && config.disableTextureRotations) {
+        if (config.disableTextureRotations) {
             switch (config.mode) {
                 case NO_ROTATIONS -> cir.setReturnValue(42L);
                 case SECURE_RANDOM -> cir.setReturnValue(NoTextureRotations.secureRandom.nextLong());
