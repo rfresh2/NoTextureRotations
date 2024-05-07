@@ -32,6 +32,7 @@ public class YACLConfigHandler implements ConfigHandler {
         instance.load();
     }
 
+    @Override
     public Screen createScreen(final Screen parent) {
         return YetAnotherConfigLib.create(instance, (defaults, config, builder) -> builder
             .title(Component.literal("NoTextureRotations"))

@@ -31,6 +31,12 @@ This mod can either:
 1. Disable block texture rotations and offsets
 2. Replace the random function with a secure implementation, which will retain the normal visual feel of the game
 
+## Configuration
+
+There are two ways to configure the mod in-game:
+1. Install [YetAnotherConfigLib](https://modrinth.com/mod/yacl) and [ModMenu](https://modrinth.com/mod/modmenu)
+2. Install [Sodium](https://modrinth.com/mod/sodium). Settings will be added to the "Quality" section Minecraft's video settings
+
 ## What's the exploit?
 
 Many blocks like grass, dirt, and stone have *variations* that rotate or change their textures slightly.

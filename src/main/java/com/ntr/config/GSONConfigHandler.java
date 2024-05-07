@@ -4,6 +4,9 @@ import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ntr.NoTextureRotations;
+import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.gui.screens.Screen;
 
 import java.io.*;
 
@@ -44,5 +47,14 @@ public class GSONConfigHandler implements ConfigHandler {
         } catch (final Throwable e) {
             NoTextureRotations.LOGGER.error("Failed to load config", e);
         }
+    }
+
+    @Override
+    public Screen createScreen(final Screen parent) {
+        if (FabricLoader.getInstance().isModLoaded("sodium")) {
+            return new SodiumOptionsGUI(parent);
+        }
+        NoTextureRotations.LOGGER.warn("Neither YetAnotherConfigLib or Sodium are present. Unable to find a config screen provider!");
+        return null;
     }
 }
