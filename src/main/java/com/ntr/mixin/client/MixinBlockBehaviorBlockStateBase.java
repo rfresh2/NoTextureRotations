@@ -19,7 +19,7 @@ public abstract class MixinBlockBehaviorBlockStateBase {
     @Inject(method = "getOffset", at = @At("HEAD"), cancellable = true)
     public void disableOffsetBasedOnPos(final BlockGetter level, final BlockPos pos, final CallbackInfoReturnable<Vec3> cir,
                                         @Local(argsOnly = true) LocalRef<BlockPos> posRef) {
-        var config = NoTextureRotations.config.get();
+        var config = NoTextureRotations.config.getConfig();
         if (config.enabled && config.disableOffsets) {
             switch (config.mode) {
                 case NO_ROTATIONS -> cir.setReturnValue(Vec3.ZERO);
