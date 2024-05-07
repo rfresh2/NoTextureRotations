@@ -2,8 +2,11 @@
   "yacl3.config.ntr:config.category.Settings": "Settings",
   "yacl3.config.ntr:config.enabled": "Enabled",
   "yacl3.config.ntr:config.disableTextureRotations": "Disable Texture Rotations",
+  "yacl3.config.ntr:config.disableTextureRotations.description": "Disables texture rotations based on their position",
   "yacl3.config.ntr:config.disableOffsets": "Disable Offsets",
+  "yacl3.config.ntr:config.disableOffsets.description": "Disables blocks like flowers position being offset based on their position",
   "yacl3.config.ntr:config.mode": "Mode",
+  "yacl3.config.ntr:config.mode.description": "Configures if rotations/offsets are fully cancelled or replaced with a secure random implementation.",
   "yacl3.config.enum.Mode.no_rotations": "No Rotations",
   "yacl3.config.enum.Mode.secure_random": "Secure Random"
 }

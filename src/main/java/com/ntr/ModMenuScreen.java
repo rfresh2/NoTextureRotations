@@ -8,7 +8,7 @@ public class ModMenuScreen implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return (screen) -> {
-            var handler = NoTextureRotations.config.getHandler();
+            var handler = NoTextureRotations.config;
             if (handler instanceof YACLConfigHandler yaclHandler) {
                 return yaclHandler.createScreen(screen);
             }

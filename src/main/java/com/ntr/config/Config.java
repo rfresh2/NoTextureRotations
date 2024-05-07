@@ -17,19 +17,19 @@ public class Config {
     @SerialEntry
     @AutoGen(category = mainCategory)
     @Boolean
-    @CustomDescription("Disables texture rotations based on their position")
+    @CustomDescription("yacl3.config.ntr:config.disableTextureRotations.description")
     public boolean disableTextureRotations = true;
 
     @SerialEntry
     @AutoGen(category = mainCategory)
     @Boolean
-    @CustomDescription("Disables blocks like flowers position being offset based on their position")
+    @CustomDescription("yacl3.config.ntr:config.disableOffsets.description")
     public boolean disableOffsets = true;
 
     @SerialEntry
     @AutoGen(category = mainCategory)
     @EnumCycler
-    @CustomDescription("Configures if rotations/offsets are fully cancelled or replaced with a secure random implementation.")
+    @CustomDescription("yacl3.config.ntr:config.mode.description")
     public Mode mode = Mode.NO_ROTATIONS;
 
     public enum Mode {
