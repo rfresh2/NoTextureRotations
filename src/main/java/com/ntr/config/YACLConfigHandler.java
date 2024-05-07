@@ -30,6 +30,7 @@ public class YACLConfigHandler implements ConfigHandler {
         HANDLER.load();
     }
 
+    @Override
     public Screen createScreen(final Screen parent) {
         return HANDLER.generateGui().generateScreen(parent);
     }

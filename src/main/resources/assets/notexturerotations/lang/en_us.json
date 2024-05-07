@@ -1,6 +1,5 @@
 {
   "yacl3.config.ntr:config.category.Settings": "Settings",
-  "yacl3.config.ntr:config.enabled": "Enabled",
   "yacl3.config.ntr:config.disableTextureRotations": "Disable Texture Rotations",
   "yacl3.config.ntr:config.disableTextureRotations.description": "Disables texture rotations based on their position",
   "yacl3.config.ntr:config.disableOffsets": "Disable Offsets",
