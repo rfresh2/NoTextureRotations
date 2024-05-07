@@ -26,7 +26,9 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.15",
-		"fabric-api": "*",
-		"yet-another-config-lib": "*"
-	}
+		"fabric-api": "*"
+	},
+    "recommends": {
+        "yet_another_config_lib": "*"
+    }
 }

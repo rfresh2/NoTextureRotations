@@ -41,7 +41,7 @@ dependencies {
 	modImplementation("maven.modrinth:modmenu:${project.modmenu_version}")
 	// causes runClient to crash on loading world :/
 	// works in prod tho so idk
-//	modImplementation("maven.modrinth:sodium:mc${project.minecraft_version}-${project.sodium_version}")
+	modCompileOnly("maven.modrinth:sodium:mc${project.minecraft_version}-${project.sodium_version}")
 }
 
 processResources {
