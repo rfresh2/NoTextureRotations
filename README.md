@@ -16,6 +16,8 @@
   <img src="https://img.shields.io/badge/MC-1.20.4-brightgreen.svg" alt="Minecraft"/>
   <img src="https://img.shields.io/badge/MC-1.20.2-brightgreen.svg" alt="Minecraft"/>
   <img src="https://img.shields.io/badge/MC-1.20.1-brightgreen.svg" alt="Minecraft"/>
+  <img src="https://img.shields.io/badge/MC-1.19.4-brightgreen.svg" alt="Minecraft"/>
+  <img src="https://img.shields.io/badge/MC-1.19.2-brightgreen.svg" alt="Minecraft"/>
 </p>
 
 
