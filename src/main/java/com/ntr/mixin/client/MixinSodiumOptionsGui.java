@@ -29,8 +29,7 @@ public class MixinSodiumOptionsGui {
     @Final @Shadow private List<OptionPage> pages;
 
     @Inject(method = "<init>", at = @At(
-        value = "INVOKE",
-        target = "Lme/jellysquid/mods/sodium/client/gui/SodiumOptionsGUI;checkPromptTimers()V"
+        value = "RETURN"
     ))
     public void injectNoTextureRotationsSettings(final Screen prevScreen, final CallbackInfo ci) {
         pages.add(new OptionPage(Component.literal("NoTextureRotations"), ImmutableList.<OptionGroup>of(
