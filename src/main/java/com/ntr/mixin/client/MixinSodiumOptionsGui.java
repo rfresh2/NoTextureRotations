@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.ntr.config.Config;
 import com.ntr.config.SodiumOptionStorage;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
+import me.jellysquid.mods.sodium.client.gui.options.OptionFlag;
 import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
 import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
@@ -41,6 +42,7 @@ public class MixinSodiumOptionsGui {
                          .setBinding(new GenericBinding<>(
                              (config, value) -> config.disableTextureRotations = value,
                              config -> config.disableTextureRotations))
+                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                          .build())
                 .add(OptionImpl.createBuilder(Boolean.TYPE, SodiumOptionStorage.INSTANCE)
                          .setName(Component.translatable("yacl3.config.ntr:config.disableOffsets"))
@@ -49,6 +51,7 @@ public class MixinSodiumOptionsGui {
                          .setBinding(new GenericBinding<>(
                              (config, value) -> config.disableOffsets = value,
                              config -> config.disableOffsets))
+                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                          .build())
                 .add(OptionImpl.createBuilder(Config.Mode.class, SodiumOptionStorage.INSTANCE)
                          .setName(Component.translatable("yacl3.config.ntr:config.mode"))
@@ -60,6 +63,7 @@ public class MixinSodiumOptionsGui {
                          .setBinding(new GenericBinding<>(
                              (config, value) -> config.mode = value,
                              config -> config.mode))
+                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                          .build())
                 .build())
         ));
