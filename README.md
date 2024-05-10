@@ -37,6 +37,8 @@ There are two ways to configure the mod in-game:
 1. Install [YetAnotherConfigLib](https://modrinth.com/mod/yacl) and [ModMenu](https://modrinth.com/mod/modmenu)
 2. Install [Sodium](https://modrinth.com/mod/sodium). A page for NoTextureRotation settings will be added to the Video Settings.
 
+The configuration file is located at: `.minecraft/config/no-texture-rotations.json`
+
 ## What's the exploit?
 
 Many blocks like grass, dirt, and stone have *variations* that rotate or change their textures slightly.
