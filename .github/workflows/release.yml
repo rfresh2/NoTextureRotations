@@ -35,4 +35,4 @@ jobs:
           allowUpdates: false
           makeLatest: true
           body: |
-            Supports MC 1.20-1.20.6
+            Supports MC 1.21

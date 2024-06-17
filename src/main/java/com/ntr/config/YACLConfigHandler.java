@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class YACLConfigHandler implements ConfigHandler {
     private final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.<Config>createBuilder(Config.class)
-        .id(new ResourceLocation("ntr", "config"))
+        .id(ResourceLocation.fromNamespaceAndPath("ntr", "config"))
         .serializer(config -> GsonConfigSerializerBuilder.create(config)
             .setPath(configPath())
             .appendGsonBuilder(GsonBuilder::setPrettyPrinting)
