@@ -5,7 +5,8 @@
   "yacl3.config.ntr:config.disableOffsets": "Disable Offsets",
   "yacl3.config.ntr:config.disableOffsets.description": "Disables blocks like flowers position being offset based on their position",
   "yacl3.config.ntr:config.mode": "Mode",
-  "yacl3.config.ntr:config.mode.description": "Configures if rotations/offsets are fully cancelled or replaced with a secure random implementation.",
+  "yacl3.config.ntr:config.mode.description": "Configures the mode of rotations/offset modifications.\n1. No Rotations: all blocks have the same rotation and offset\n2. Secure Random: a new secure random seed is generated for every block\n3. Random Offset: a random number generated on client launch is added to the rotation/offset function. Use with caution, this offset can be reversed if you show coordinates of block rotations during the game session.",
   "yacl3.config.enum.Mode.no_rotations": "No Rotations",
-  "yacl3.config.enum.Mode.secure_random": "Secure Random"
+  "yacl3.config.enum.Mode.secure_random": "Secure Random",
+  "yacl3.config.enum.Mode.random_offset": "Random Offset"
 }

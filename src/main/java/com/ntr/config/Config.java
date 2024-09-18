@@ -28,6 +28,6 @@ public class Config {
     public Mode mode = Mode.NO_ROTATIONS;
 
     public enum Mode {
-        NO_ROTATIONS, SECURE_RANDOM;
+        NO_ROTATIONS, SECURE_RANDOM, RANDOM_OFFSET;
     }
 }
