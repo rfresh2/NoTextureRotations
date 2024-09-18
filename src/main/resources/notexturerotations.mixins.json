@@ -5,6 +5,7 @@
 	"client": [
 		"MixinBlockBehavior",
 		"MixinBlockBehaviorBlockStateBase",
+		"MixinSodium6OptionsGui",
 		"MixinSodiumOptionsGui"
 	],
 	"injectors": {
