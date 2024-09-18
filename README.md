@@ -31,7 +31,12 @@ Compatible with Vanilla MC, Sodium, and custom texture/resource packs
 
 This mod can either:
 1. Disable block texture rotations and offsets
-2. Replace the random function with a secure implementation, which will retain the normal visual feel of the game
+2. Replace the random function with a secure implementation. Will mostly retain the normal visual feel of the game. 
+However, rotations/offsets may appear to shuffle if reloaded. 
+3. Add a random offset generated at game launch to the block position function, which will most faithfully retain the game visuals.
+Be warned, it is possible to reverse the offset if you were to reveal the real coordinates of rotated/offset blocks at any point during the same game session.
+
+
 
 ## Configuration
 

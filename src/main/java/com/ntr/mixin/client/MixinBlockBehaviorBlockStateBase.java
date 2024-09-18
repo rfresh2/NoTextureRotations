@@ -24,6 +24,13 @@ public abstract class MixinBlockBehaviorBlockStateBase {
             switch (config.mode) {
                 case NO_ROTATIONS -> cir.setReturnValue(Vec3.ZERO);
                 case SECURE_RANDOM -> posRef.set(BlockPos.of(NoTextureRotations.secureRandom.nextLong()));
+                case RANDOM_OFFSET -> posRef.set(
+                    new BlockPos(
+                        posRef.get().getX() + NoTextureRotations.offsetsRandomOffsetX,
+                        posRef.get().getY() + NoTextureRotations.offsetsRandomOffsetY,
+                        posRef.get().getZ() + NoTextureRotations.offsetsRandomOffsetZ
+                    )
+                );
             }
         }
     }

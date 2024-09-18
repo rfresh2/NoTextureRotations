@@ -2,6 +2,7 @@ package com.ntr.mixin.client;
 
 import com.ntr.NoTextureRotations;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,6 +20,7 @@ public class MixinBlockBehavior {
             switch (config.mode) {
                 case NO_ROTATIONS -> cir.setReturnValue(42L);
                 case SECURE_RANDOM -> cir.setReturnValue(NoTextureRotations.secureRandom.nextLong());
+                case RANDOM_OFFSET -> cir.setReturnValue(Mth.getSeed(pos) + NoTextureRotations.rotationsRandomOffset);
             }
         }
     }

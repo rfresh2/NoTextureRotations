@@ -58,7 +58,8 @@ public class MixinSodiumOptionsGui {
                          .setTooltip(Component.translatable("yacl3.config.ntr:config.mode.description"))
                          .setControl(o -> new CyclingControl<Config.Mode>(o, Config.Mode.class, new Component[]{
                              Component.translatable("yacl3.config.enum.Mode.no_rotations"),
-                             Component.translatable("yacl3.config.enum.Mode.secure_random")
+                             Component.translatable("yacl3.config.enum.Mode.secure_random"),
+                             Component.translatable("yacl3.config.enum.Mode.random_offset")
                          }))
                          .setBinding(new GenericBinding<>(
                              (config, value) -> config.mode = value,
