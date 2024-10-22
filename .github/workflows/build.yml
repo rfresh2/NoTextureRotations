@@ -3,12 +3,12 @@ on: [pull_request, push]
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
       - name: validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/actions/wrapper-validation@v3
       - name: setup jdk
         uses: actions/setup-java@v4
         with:
