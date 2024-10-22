@@ -37,14 +37,13 @@ dependencies {
 	minecraft("com.mojang:minecraft:${project.minecraft_version}")
 	mappings loom.layered {
 		officialMojangMappings()
-//		parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+		parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
 	}
 	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 	modImplementation("dev.isxander:yet-another-config-lib:${project.yacl_version}+${project.minecraft_version}-fabric")
 	modImplementation("maven.modrinth:modmenu:${project.modmenu_version}")
 	modImplementation("maven.modrinth:sodium:mc${project.minecraft_version}-${project.sodium_version}")
-	modCompileOnly(files("libs/sodium-fabric-0.6.0-beta.2+mc1.21.1.jar"))
 }
 
 processResources {
