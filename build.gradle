@@ -1,8 +1,8 @@
 plugins {
-	id 'fabric-loom' version '1.7-SNAPSHOT'
+	id 'fabric-loom' version '1.8-SNAPSHOT'
 }
 
-version = "${project.mod_version}+1.21.x"
+version = "${project.mod_version}+1.21.2"
 group = project.maven_group
 
 base {
@@ -44,7 +44,6 @@ dependencies {
 	modImplementation("dev.isxander:yet-another-config-lib:${project.yacl_version}+${project.minecraft_version}-fabric")
 	modImplementation("maven.modrinth:modmenu:${project.modmenu_version}")
 	modImplementation("maven.modrinth:sodium:mc${project.minecraft_version}-${project.sodium_version}")
-	modCompileOnly(files("libs/sodium-fabric-0.6.0-beta.2+mc1.21.1.jar"))
 }
 
 processResources {

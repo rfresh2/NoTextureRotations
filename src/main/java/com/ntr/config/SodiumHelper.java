@@ -32,11 +32,7 @@ public class SodiumHelper {
     }
 
     public static Screen getSodiumOptionsScreen(final Screen parent) {
-        if (!isSodiumPresent()) return null;
-        if (isSodium6Present()) {
-            return net.caffeinemc.mods.sodium.client.gui.SodiumOptionsGUI.createScreen(parent);
-        } else {
-            return me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI.createScreen(parent);
-        }
+        if (!isSodium6Present()) return null;
+        return net.caffeinemc.mods.sodium.client.gui.SodiumOptionsGUI.createScreen(parent);
     }
 }
