@@ -30,7 +30,7 @@ public abstract class MixinBlockBehaviorBlockStateBase {
                     var chunkPos = ChunkPos.asLong(pos);
                     int offset = NoTextureRotations.randomOffsetByChunkCache.getUnchecked(chunkPos);
                     posRef.set(
-                        posRef.get().offset(offset, offset, offset)
+                        posRef.get().offset(offset, 0, offset)
                     );
                 }
             }

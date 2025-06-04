@@ -24,7 +24,7 @@ public class MixinBlockBehavior {
                 case RANDOM_OFFSET -> {
                     var chunkPos = ChunkPos.asLong(pos);
                     int offset = NoTextureRotations.randomOffsetByChunkCache.getUnchecked(chunkPos);
-                    cir.setReturnValue(Mth.getSeed(pos) + offset);
+                    cir.setReturnValue(Mth.getSeed(pos.getX() + offset, pos.getY(), pos.getZ() + offset));
                 }
             }
         }
