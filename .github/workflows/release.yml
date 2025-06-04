@@ -11,22 +11,23 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
-      - name: validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
+
       - name: setup jdk
         uses: actions/setup-java@v4
         with:
           java-version: 17
           distribution: 'temurin'
+
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          dependency-graph: generate-and-submit
+
       - name: build
         run: ./gradlew build
-      - name: capture build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Artifacts
-          path: build/libs/
 
       - name: Github Release
         uses: ncipollo/release-action@v1
