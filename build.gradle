@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.8-SNAPSHOT'
+	id 'fabric-loom' version '1.10-SNAPSHOT'
 }
 
 version = "${project.mod_version}+1.21"
@@ -43,7 +43,7 @@ dependencies {
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 	modImplementation("dev.isxander:yet-another-config-lib:${project.yacl_version}+${project.minecraft_version}-fabric")
 	modImplementation("maven.modrinth:modmenu:${project.modmenu_version}")
-	modImplementation("maven.modrinth:sodium:mc${project.minecraft_version}-${project.sodium_version}")
+	modImplementation("maven.modrinth:sodium:mc${project.minecraft_version}-${project.sodium_version}-fabric")
 }
 
 processResources {
