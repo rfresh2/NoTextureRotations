@@ -4,8 +4,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"client": [
 		"MixinBlockBehavior",
-		"MixinBlockBehaviorBlockStateBase",
-		"MixinSodium6OptionsGui"
+		"MixinBlockBehaviorBlockStateBase"
 	],
 	"injectors": {
 		"defaultRequire": 1

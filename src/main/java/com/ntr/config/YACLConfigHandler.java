@@ -4,11 +4,11 @@ import com.google.gson.GsonBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class YACLConfigHandler implements ConfigHandler {
     private final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.<Config>createBuilder(Config.class)
-        .id(ResourceLocation.fromNamespaceAndPath("ntr", "config"))
+        .id(Identifier.fromNamespaceAndPath("ntr", "config"))
         .serializer(config -> GsonConfigSerializerBuilder.create(config)
             .setPath(configPath())
             .appendGsonBuilder(GsonBuilder::setPrettyPrinting)
