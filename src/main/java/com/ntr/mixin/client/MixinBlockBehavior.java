@@ -22,7 +22,7 @@ public class MixinBlockBehavior {
                 case NO_ROTATIONS -> cir.setReturnValue(42L);
                 case SECURE_RANDOM -> cir.setReturnValue(NoTextureRotations.secureRandom.nextLong());
                 case RANDOM_OFFSET -> {
-                    var chunkPos = ChunkPos.asLong(pos);
+                    var chunkPos = ChunkPos.pack(pos);
                     int offset = NoTextureRotations.randomOffsetByChunkCache.getUnchecked(chunkPos);
                     cir.setReturnValue(Mth.getSeed(pos.getX() + offset, pos.getY(), pos.getZ() + offset));
                 }

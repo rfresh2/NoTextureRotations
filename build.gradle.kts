@@ -1,19 +1,18 @@
 plugins {
-    id("net.fabricmc.fabric-loom-remap") version "1.15-SNAPSHOT"
+    id("net.fabricmc.fabric-loom") version "1.15-SNAPSHOT"
 }
 
 val modVersion = property("mod_version") as String
 val mavenGroup = property("maven_group") as String
 val archivesBaseName = property("archives_base_name") as String
 val minecraftVersion = property("minecraft_version") as String
-val parchmentVersion = property("parchment_version") as String
 val loaderVersion = property("loader_version") as String
 val fabricVersion = property("fabric_version") as String
 val yaclVersion = property("yacl_version") as String
 val modmenuVersion = property("modmenu_version") as String
 val sodiumVersion = property("sodium_version") as String
 
-version = "$modVersion+1.21.11"
+version = "$modVersion+26.1"
 group = mavenGroup
 
 base {
@@ -37,21 +36,19 @@ repositories {
         name = "Xander Maven"
         url = uri("https://maven.isxander.dev/releases")
     }
+    maven {
+        name = "CaffeineMC"
+        url = uri("https://maven.caffeinemc.net/releases") // or /snapshots
+    }
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:$minecraftVersion")
-    mappings(
-        loom.layered {
-            officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-$minecraftVersion:$parchmentVersion@zip")
-        }
-    )
-    modImplementation("net.fabricmc:fabric-loader:$loaderVersion")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
-    modImplementation("dev.isxander:yet-another-config-lib:${yaclVersion}+${minecraftVersion}-fabric")
-    modImplementation("maven.modrinth:modmenu:$modmenuVersion")
-    modImplementation("maven.modrinth:sodium:mc$minecraftVersion-$sodiumVersion-fabric")
+    minecraft("com.mojang:minecraft:26.1-rc-2")
+    implementation("net.fabricmc:fabric-loader:$loaderVersion")
+    implementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
+    implementation("dev.isxander:yet-another-config-lib:${yaclVersion}+${minecraftVersion}-fabric")
+    implementation("maven.modrinth:modmenu:$modmenuVersion")
+    implementation(files("lib/sodium-fabric-0.8.6-SNAPSHOT+mc26.1-pre-1-local.jar"))
 }
 
 tasks.processResources {
@@ -73,12 +70,12 @@ tasks.processResources {
 }
 
 tasks.withType<JavaCompile>().configureEach {
-    options.release.set(21)
+    options.release.set(25)
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 tasks.jar {

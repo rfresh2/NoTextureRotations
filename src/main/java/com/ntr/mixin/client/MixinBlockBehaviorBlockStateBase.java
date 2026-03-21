@@ -27,7 +27,7 @@ public abstract class MixinBlockBehaviorBlockStateBase {
                 case NO_ROTATIONS -> cir.setReturnValue(Vec3.ZERO);
                 case SECURE_RANDOM -> posRef.set(BlockPos.of(NoTextureRotations.secureRandom.nextLong()));
                 case RANDOM_OFFSET -> {
-                    var chunkPos = ChunkPos.asLong(pos);
+                    var chunkPos = ChunkPos.pack(pos);
                     int offset = NoTextureRotations.randomOffsetByChunkCache.getUnchecked(chunkPos);
                     posRef.set(
                         posRef.get().offset(offset, 0, offset)
