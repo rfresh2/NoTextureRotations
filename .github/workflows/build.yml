@@ -26,7 +26,9 @@ jobs:
         run: ./gradlew build
 
       - name: capture build artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: Artifacts
           path: build/libs/
+          if-no-files-found: error
+          archive: false
