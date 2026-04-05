@@ -43,13 +43,12 @@ repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:26.1-rc-2")
+    minecraft("com.mojang:minecraft:$minecraftVersion")
     implementation("net.fabricmc:fabric-loader:$loaderVersion")
     implementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
-    implementation("dev.isxander:yet-another-config-lib:${yaclVersion}+${minecraftVersion}-fabric")
+    implementation("maven.modrinth:yacl:$yaclVersion+26.1-fabric")
     implementation("maven.modrinth:modmenu:$modmenuVersion")
-    implementation(files("lib/sodium-fabric-0.8.6-SNAPSHOT+mc26.1-pre-1-local.jar"))
-}
+    implementation("net.caffeinemc:sodium-fabric:$sodiumVersion+mc$minecraftVersion")}
 
 tasks.processResources {
     inputs.properties(
