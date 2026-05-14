@@ -48,7 +48,7 @@ dependencies {
     implementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
     implementation("maven.modrinth:yacl:$yaclVersion+26.1-fabric")
     implementation("maven.modrinth:modmenu:$modmenuVersion")
-    implementation("net.caffeinemc:sodium-fabric:$sodiumVersion+mc26.1.1")}
+    implementation("net.caffeinemc:sodium-fabric:$sodiumVersion+mc$minecraftVersion")}
 
 tasks.processResources {
     inputs.properties(
