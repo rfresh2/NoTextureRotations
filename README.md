@@ -12,6 +12,7 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/MC-26.2-brightgreen.svg" alt="Minecraft"/>
   <img src="https://img.shields.io/badge/MC-26.1-brightgreen.svg" alt="Minecraft"/>
   <img src="https://img.shields.io/badge/MC-1.21.11-brightgreen.svg" alt="Minecraft"/>
   <img src="https://img.shields.io/badge/MC-1.21.10-brightgreen.svg" alt="Minecraft"/>
