@@ -1,5 +1,5 @@
 plugins {
-    id("net.fabricmc.fabric-loom-remap") version "1.16-SNAPSHOT"
+    id("net.fabricmc.fabric-loom-remap") version "1.17-SNAPSHOT"
 }
 
 val modVersion = property("mod_version") as String
