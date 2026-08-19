@@ -1,9 +1,23 @@
 name: release
 
 on:
-  push:
-    tags:
-      - '[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+    inputs:
+      github:
+        description: 'Github'
+        required: true
+        default: true
+        type: boolean
+      modrinth:
+        description: 'Modrinth'
+        required: true
+        default: true
+        type: boolean
+      curseforge:
+        description: 'CurseForge'
+        required: true
+        default: true
+        type: boolean
 
 jobs:
   build-and-release:
@@ -29,11 +43,20 @@ jobs:
       - name: build
         run: ./gradlew build
 
-      - name: Github Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/libs/*.jar"
-          allowUpdates: false
-          makeLatest: true
-          body: |
-            Supports MC 1.20-1.20.6
+      - name: github release
+        if: ${{ github.event.inputs.github }}
+        run: ./gradlew publishGithub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: modrinth release
+        if: ${{ github.event.inputs.modrinth }}
+        run: ./gradlew publishModrinth
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+
+      - name: curseforge release
+        if: ${{ github.event.inputs.curseforge }}
+        run: ./gradlew publishCurseforge
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
