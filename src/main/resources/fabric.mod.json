@@ -19,7 +19,10 @@
 		],
 		"modmenu": [
 			"com.ntr.ModMenuScreen"
-		]
+		],
+        "sodium:config_api_user": [
+            "com.ntr.SodiumConfigBuilder"
+        ]
 	},
 	"mixins": [
 		"notexturerotations.mixins.json"
