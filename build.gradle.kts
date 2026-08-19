@@ -1,8 +1,15 @@
+import me.modmuss50.mpp.ReleaseType
+import me.modmuss50.mpp.platforms.modrinth.ModrinthEnvironment
+
 plugins {
-    id("net.fabricmc.fabric-loom-remap") version "1.16-SNAPSHOT"
+    id("net.fabricmc.fabric-loom-remap") version "1.17-SNAPSHOT"
+    id("me.modmuss50.mod-publish-plugin") version "2.2.0"
 }
 
 val modVersion = property("mod_version") as String
+val modReleaseVersion = property("mod_release_version") as String
+val modMcVersionStart = property("mod_mc_version_start") as String
+val modMcVersionEnd = property("mod_mc_version_end") as String
 val mavenGroup = property("maven_group") as String
 val archivesBaseName = property("archives_base_name") as String
 val minecraftVersion = property("minecraft_version") as String
@@ -12,12 +19,19 @@ val fabricVersion = property("fabric_version") as String
 val yaclVersion = property("yacl_version") as String
 val modmenuVersion = property("modmenu_version") as String
 val sodiumVersion = property("sodium_version") as String
+val javaVersion = property("java_version") as String
 
-version = "$modVersion+1.21.11"
+version = "$modVersion+$modReleaseVersion"
 group = mavenGroup
 
 base {
     archivesName.set(archivesBaseName)
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+    }
 }
 
 repositories {
@@ -54,35 +68,70 @@ dependencies {
     modImplementation("maven.modrinth:sodium:mc$minecraftVersion-$sodiumVersion-fabric")
 }
 
-tasks.processResources {
-    inputs.properties(
-        mapOf(
-            "version" to modVersion,
-            "minecraft_version" to minecraftVersion,
-        )
-    )
-
-    filesMatching("fabric.mod.json") {
-        expand(
+tasks {
+    processResources {
+        inputs.properties(
             mapOf(
                 "version" to modVersion,
                 "minecraft_version" to minecraftVersion,
             )
         )
+        filesMatching("fabric.mod.json") {
+            expand(
+                mapOf(
+                    "version" to modVersion,
+                    "minecraft_version" to minecraftVersion,
+                )
+            )
+        }
+    }
+    jar {
+        from("LICENSE") {
+            rename { "${it}_${project.base.archivesName.get()}" }
+        }
     }
 }
 
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(21)
-}
+publishMods {
+    file = tasks.remapJar.get().archiveFile
+    changelog = """
+        # $modVersion
+    """.trimIndent()
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-}
+    displayName = "$modVersion+$modReleaseVersion"
+    version = displayName
+    modLoaders = listOf("fabric")
+    type = ReleaseType.STABLE
 
-tasks.jar {
-    from("LICENSE") {
-        rename { "${it}_${project.base.archivesName.get()}" }
+    github {
+        accessToken = providers.environmentVariable("GITHUB_TOKEN")
+        repository = "rfresh2/NoTextureRotations"
+        commitish = "1.20.x"
+        tagName = modVersion
+        displayName = modVersion
+        version = modVersion
     }
+    curseforge {
+        projectId = "1013466"
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        client = true
+        server = false
+        minecraftVersionRange {
+            start = modMcVersionStart
+            end = modMcVersionEnd
+        }
+        requires("306612") // fabric api
+    }
+    modrinth {
+        projectId = "h4ktIYQ8"
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        environment = ModrinthEnvironment.CLIENT_ONLY
+        minecraftVersionRange {
+            start = modMcVersionStart
+            end = modMcVersionEnd
+        }
+        optional("sodium", "modmenu", "yacl")
+        requires("fabric-api")
+    }
+    dryRun = !providers.environmentVariable("MODRINTH_TOKEN").isPresent
 }
