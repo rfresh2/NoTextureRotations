@@ -3,7 +3,7 @@ import me.modmuss50.mpp.platforms.modrinth.ModrinthEnvironment
 
 plugins {
     id("net.fabricmc.fabric-loom-remap") version "1.17-SNAPSHOT"
-    id("me.modmuss50.mod-publish-plugin") version "2.2.0"
+    id("me.modmuss50.mod-publish-plugin") version "2.2.1"
 }
 
 val modVersion = property("mod_version") as String
