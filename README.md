@@ -39,12 +39,21 @@ Compatible with Vanilla MC, Sodium, and custom texture/resource packs
 
 # How the mod works
 
-This mod can either:
-1. Disable block texture rotations and offsets
-2. Replace the random function with a secure implementation. Will mostly retain the normal visual feel of the game. 
-However, rotations/offsets may appear to shuffle if reloaded. 
-3. Generate a random offset for every chunk. Prevents shifting rotations present in Secure Random.
+This mod provides multiple modes to select from:
 
+* No Rotations: All blocks have the same rotation and offset
+* Random: A new random seed is generated for each block position. However, rotations/offsets will shuffle if reloaded. 
+* Stable Random: Generates and remembers a random offset from the 0,0 chunk for each chunk. Offsets are re-generated each game session.
+* Repeating Chunk: Use the same rotations and offsets as the chunk section at 0,0,0 for each chunk
+
+note: a chunk section is a 16x16x16 part of a chunk. no modes are vulnerable to absolute x or z coords being cracked.
+
+|                 | visual variation | deterministic    | security issues/notes                                                  |
+|-----------------|------------------|------------------|------------------------------------------------------------------------|
+| no rotations    | none             | yes              | none                                                                   |
+| random          | high             | no               | none                                                                   |
+| stable random   | high             | per game session | y coord and xz section coords can be cracked if many examples provided |
+| repeating chunk | medium           | yes              | xyz section coords can be cracked                                      |
 
 
 ## Configuration
@@ -67,16 +76,19 @@ Texture variants are not inherently bad, they make the game visually more intere
 
 The problem is that the "random" number used to select the variant is seeded by the block's position in-game. No world seed is required.
 
-Offsets works similarly, some blocks like flowers offset their position from the center of the block with a "random" offset.
+Offsets work similarly, some blocks like flowers offset their position from the center of the block with a "random" offset.
 
 Any screenshots or videos that show examples of these blocks are susceptible to an attacker cracking the block coordinates.
 
 On anarchy servers, this can be particularly powerful - leading to bases with images or videos shared being found.
 
-This is not a new discovery, and the method has been known since at least before 2018 and is still regularly used today
-in reversing panorma seeds. Example: https://youtu.be/gE1dMNCyofs?t=57
+This is not a new discovery, the method has been known since at least before 2018 and is still regularly used today
+for finding panorma seeds. Example: https://youtu.be/gE1dMNCyofs?t=57
 
-There are multiple public tools to perform this:
+more detailed explanation: https://gitea.com/ChromeCrusher/Texploit-Guide
+
+some examples of public coord cracking tools:
 * https://github.com/19MisterX98/TextureRotations
 * https://github.com/coolmann24/TextureFinderJava
+* https://github.com/ALaggyDev/CoordsFinder
 

@@ -60,6 +60,7 @@ public class MixinSodiumOptionsGui {
                              Component.translatable("yacl3.config.enum.Mode.no_rotations"),
                              Component.translatable("yacl3.config.enum.Mode.secure_random"),
                              Component.translatable("yacl3.config.enum.Mode.random_offset"),
+                             Component.translatable("yacl3.config.enum.Mode.repeating_section"),
                          }))
                          .setBinding(new GenericBinding<>(
                              (config, value) -> config.mode = value,
