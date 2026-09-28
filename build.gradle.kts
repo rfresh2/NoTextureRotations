@@ -137,5 +137,7 @@ publishMods {
         optional("sodium", "modmenu", "yacl")
         requires("fabric-api")
     }
-    dryRun = !providers.environmentVariable("MODRINTH_TOKEN").isPresent
+    dryRun = !providers.environmentVariable("GITHUB_TOKEN").isPresent
+            && !providers.environmentVariable("CURSEFORGE_TOKEN").isPresent
+            && !providers.environmentVariable("MODRINTH_TOKEN").isPresent
 }
