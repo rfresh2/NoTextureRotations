@@ -16,7 +16,8 @@ public class Config {
     public enum Mode {
         NO_ROTATIONS("yacl3.config.enum.Mode.no_rotations"),
         SECURE_RANDOM("yacl3.config.enum.Mode.secure_random"),
-        RANDOM_OFFSET("yacl3.config.enum.Mode.random_offset");
+        RANDOM_OFFSET("yacl3.config.enum.Mode.random_offset"),
+        REPEATING_SECTION("yacl3.config.enum.Mode.repeating_section");
 
         private final String translateKey;
 
