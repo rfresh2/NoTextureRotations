@@ -120,7 +120,8 @@ publishMods {
             start = modMcVersionStart
             end = modMcVersionEnd
         }
-        requires("306612") // fabric api
+        optional("sodium", "modmenu", "yacl")
+        requires("fabric-api")
     }
     modrinth {
         projectId = "h4ktIYQ8"
