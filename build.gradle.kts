@@ -96,7 +96,11 @@ publishMods {
     file = tasks.remapJar.get().archiveFile
     changelog = """
         # $modVersion
-    """.trimIndent()
+        
+        * Added `Repeating Section` mode
+        * Updated `Stable Random` mode to improve security - now offsets from section coords rather than real xz coords
+        * Updated documentation for more easily comparing modes
+        """.trimIndent()
 
     displayName = "$modVersion+$modReleaseVersion"
     version = displayName
