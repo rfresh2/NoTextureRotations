@@ -39,9 +39,12 @@ jobs:
 
       - name: github release
         if: inputs.github == true
-        run: ./gradlew publishGithub
+        run: |
+          tag=$(sed -n 's/^mod_version=//p' gradle.properties)
+          mod_release_version=$(sed -n 's/^mod_release_version=//p' gradle.properties)
+          gh release upload "$tag" "build/libs/NoTextureRotations-${tag}+${mod_release_version}.jar"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: modrinth release
         if: inputs.modrinth == true
