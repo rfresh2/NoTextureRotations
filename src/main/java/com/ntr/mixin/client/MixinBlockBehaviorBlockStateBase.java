@@ -1,10 +1,8 @@
 package com.ntr.mixin.client;
 
-import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.ntr.NoTextureRotations;
+import com.ntr.client.RenderOffsetContext;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,25 +16,11 @@ public abstract class MixinBlockBehaviorBlockStateBase {
     // makes blocks like flowers not be offset based on their block position
     @Inject(method = "getOffset", at = @At("HEAD"), cancellable = true)
     public void disableOffsetBasedOnPos(
-        final BlockPos pos, final CallbackInfoReturnable<Vec3> cir,
-        @Local(argsOnly = true) LocalRef<BlockPos> posRef
+        final BlockPos pos, final CallbackInfoReturnable<Vec3> cir
     ) {
         var config = NoTextureRotations.config.getConfig();
-        if (config.disableOffsets) {
-            switch (config.mode) {
-                case NO_ROTATIONS -> cir.setReturnValue(Vec3.ZERO);
-                case SECURE_RANDOM -> posRef.set(BlockPos.of(NoTextureRotations.secureRandom.nextLong()));
-                case RANDOM_OFFSET -> {
-                    var chunkPos = ChunkPos.pack(pos);
-                    int offset = NoTextureRotations.randomOffsetByChunkCache.getUnchecked(chunkPos);
-                    posRef.set(
-                        new BlockPos((pos.getX() & 15) + offset, pos.getY(), (pos.getZ() & 15) + offset)
-                    );
-                }
-                case REPEATING_SECTION -> {
-                    posRef.set(new BlockPos(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15));
-                }
-            }
+        if (config.disableOffsets && RenderOffsetContext.isRendering()) {
+            cir.setReturnValue(Vec3.ZERO);
         }
     }
 }
