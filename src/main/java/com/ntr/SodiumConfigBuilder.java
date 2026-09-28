@@ -37,6 +37,7 @@ public class SodiumConfigBuilder implements ConfigEntryPoint {
                             case NO_ROTATIONS -> Component.translatable("yacl3.config.enum.Mode.no_rotations");
                             case SECURE_RANDOM -> Component.translatable("yacl3.config.enum.Mode.secure_random");
                             case RANDOM_OFFSET -> Component.translatable("yacl3.config.enum.Mode.random_offset");
+                            case REPEATING_SECTION -> Component.translatable("yacl3.config.enum.Mode.repeating_section");
                         }))
                         .setStorageHandler(NoTextureRotations.config::save)
                         .setBinding((v) -> NoTextureRotations.config.getConfig().mode = v, () -> NoTextureRotations.config.getConfig().mode)
