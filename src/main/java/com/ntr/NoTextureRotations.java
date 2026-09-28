@@ -3,10 +3,7 @@ package com.ntr;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.ntr.config.ConfigHandler;
-import com.ntr.config.GSONConfigHandler;
-import com.ntr.config.YACLConfigHandler;
-import com.ntr.config.YACLConfigHelper;
+import com.ntr.config.*;
 import net.fabricmc.api.ClientModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +26,10 @@ public class NoTextureRotations implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		config.load();
+		if (config.getConfig().mode == null) {
+			// can happen if the file contained an unknown mode string for whatever reason
+			config.getConfig().mode = Config.Mode.NO_ROTATIONS;
+		}
 	}
 
 	private static ConfigHandler getConfigHandler() {
