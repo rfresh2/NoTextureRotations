@@ -1,5 +1,6 @@
 package com.ntr.config;
 
+import com.google.gson.annotations.SerializedName;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
 import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
@@ -28,6 +29,8 @@ public class Config {
     public Mode mode = Mode.NO_ROTATIONS;
 
     public enum Mode {
-        NO_ROTATIONS, SECURE_RANDOM, RANDOM_OFFSET, REPEATING_SECTION;
+        NO_ROTATIONS,
+        @SerializedName(value = "KEYED_RANDOM", alternate = {"SECURE_RANDOM", "RANDOM_OFFSET", "REPEATING_SECTION"})
+        KEYED_RANDOM
     }
 }

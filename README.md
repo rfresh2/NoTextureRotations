@@ -42,18 +42,12 @@ Compatible with Vanilla MC, Sodium, and custom texture/resource packs
 This mod provides multiple modes to select from:
 
 * No Rotations: All blocks have the same rotation and offset
-* Random: A new random seed is generated for each block position. However, rotations/offsets will shuffle if reloaded. 
-* Stable Random: Generates and remembers a random offset from the 0,0 chunk for each chunk. Offsets are re-generated each game session.
-* Repeating Chunk: Use the same rotations and offsets as the chunk section at 0,0,0 for each chunk
+* Keyed Random: Securely hashes (SipHash-2-4) position and server identifier data with a secret key (`config/no-texture-rotations.key`)
 
-note: a chunk section is a 16x16x16 part of a chunk. no modes are vulnerable to absolute x or z coords being cracked.
-
-|                 | visual variation | deterministic    | security issues/notes                                                  |
-|-----------------|------------------|------------------|------------------------------------------------------------------------|
-| no rotations    | none             | yes              | none                                                                   |
-| random          | high             | no               | none                                                                   |
-| stable random   | high             | per game session | y coord and xz section coords can be cracked if many examples provided |
-| repeating chunk | medium           | yes              | xyz section coords can be cracked                                      |
+|                 | visual variation | deterministic    | security issues/notes         |
+|-----------------|------------------|------------------|-------------------------------|
+| no rotations    | none             | yes              | none                          |
+| keyed random    | high             | yes (per key)    | key file must be kept private |
 
 
 ## Configuration

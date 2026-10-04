@@ -5,9 +5,8 @@
   "yacl3.config.ntr:config.disableOffsets": "Disable Offsets",
   "yacl3.config.ntr:config.disableOffsets.description": "Disables blocks like flowers position being offset based on their position",
   "yacl3.config.ntr:config.mode": "Mode",
-  "yacl3.config.ntr:config.mode.description": "Configures the mode of rotations/offset modifications.\n1. No Rotations: all blocks have the same rotation and offset\n2. Random: a new random seed is generated for each block position. However, rotations/offsets will shuffle if reloaded.\n3. Stable Random: Generates and remembers a random offset from the 0,0,0 chunk section for each chunk. Offsets are re-generated each game session.\n4. Repeating Section: Use the same rotations and offsets as the chunk section at 0,0,0 for each chunk",
+  "yacl3.config.ntr:config.mode.description": "Configures the mode of rotations/offset modifications.\n1. No Rotations: all blocks have the same rotation and offset\n2. Keyed Random: Securely hashes (SipHash-2-4) position and server identifier data with a secret key",
   "yacl3.config.enum.Mode.no_rotations": "No Rotations",
-  "yacl3.config.enum.Mode.secure_random": "Random",
-  "yacl3.config.enum.Mode.random_offset": "Stable Random",
-  "yacl3.config.enum.Mode.repeating_section": "Repeating Section"
+  "yacl3.config.enum.Mode.keyed_random": "Keyed Random",
+  "ntr.command.regenerateKey.success": "Regenerated texture rotations key"
 }
