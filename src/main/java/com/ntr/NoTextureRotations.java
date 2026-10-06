@@ -1,13 +1,13 @@
 package com.ntr;
 
 import com.ntr.config.*;
+import com.ntr.mixin.client.AccessorMinecraftServer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.storage.LevelResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +61,6 @@ public class NoTextureRotations implements ClientModInitializer {
 		});
 	}
 
-	// key derived from the current server/save and dimension, called from chunk builder threads
 	public static KeyedHash keyedHash() {
 		var mc = Minecraft.getInstance();
 		ClientLevel level = null;
@@ -77,13 +76,16 @@ public class NoTextureRotations implements ClientModInitializer {
 		if (cached.master() == master && Objects.equals(cached.levelHashCode(), levelHashCode)) {
 			return cached.keyedHash();
 		}
-        KeyedHash keyedHash;
-        if (level == null) {
-            keyedHash = master;
-        } else {
-            keyedHash = master.derive(levelContext(mc, level));
+        var keyedHash = master;
+        if (level != null) {
+			try {
+				var levelContext = levelContext(mc, level);
+				keyedHash = master.derive(levelContext);
+				levelKeyedHash = new LevelKeyedHash(master, levelHashCode, keyedHash);
+			} catch (Exception e) {
+				LOGGER.warn("Failed computing level keyed hash");
+			}
         }
-        levelKeyedHash = new LevelKeyedHash(master, levelHashCode, keyedHash);
 		return keyedHash;
 	}
 
@@ -92,7 +94,7 @@ public class NoTextureRotations implements ClientModInitializer {
 		var spServer = mc.getSingleplayerServer();
 		if (spServer != null) {
 			// save folder name, the display name can be changed
-			var saveName = spServer.getWorldPath(LevelResource.ROOT).normalize().getFileName().toString();
+			var saveName = ((AccessorMinecraftServer) spServer).getStorageSource().getLevelDirectory().path().normalize().getFileName().toString();
 			return "sp\0" + saveName + "\0" + dimension;
 		}
 		var serverData = mc.getCurrentServer();

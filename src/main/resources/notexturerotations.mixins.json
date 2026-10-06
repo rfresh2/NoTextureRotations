@@ -3,6 +3,7 @@
   "package": "com.ntr.mixin.client",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "AccessorMinecraftServer",
     "MixinBlockBehavior",
     "MixinBlockBehaviorBlockStateBase",
     "MixinSodiumOptionsGui"
