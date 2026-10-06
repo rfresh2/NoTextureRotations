@@ -3,6 +3,7 @@ package com.ntr.mixin.client;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.ntr.NoTextureRotations;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -22,20 +23,31 @@ public abstract class MixinBlockBehaviorBlockStateBase {
         @Local(argsOnly = true) LocalRef<BlockPos> posRef
     ) {
         var config = NoTextureRotations.config.getConfig();
-        if (config.disableOffsets) {
-            switch (config.mode) {
-                case NO_ROTATIONS -> cir.setReturnValue(Vec3.ZERO);
-                case SECURE_RANDOM -> posRef.set(BlockPos.of(NoTextureRotations.secureRandom.nextLong()));
-                case RANDOM_OFFSET -> {
-                    var chunkPos = ChunkPos.asLong(pos);
-                    int offset = NoTextureRotations.randomOffsetByChunkCache.getUnchecked(chunkPos);
-                    posRef.set(
-                        new BlockPos((pos.getX() & 15) + offset, pos.getY(), (pos.getZ() & 15) + offset)
-                    );
-                }
-                case REPEATING_SECTION -> {
-                    posRef.set(new BlockPos(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15));
-                }
+        if (!config.disableOffsets) return;
+        var mc = Minecraft.getInstance();
+        if (mc == null) return; // will occur at mc bootstrap as blockstate cache is populated
+
+        // collisions and pushing happen in entity tick
+        // allow these to occur with original offsets
+        // otherwise our collisions are desync'd from the server
+        if (NoTextureRotations.inClientLevelTick.get()) return;
+        var spServer = mc.getSingleplayerServer();
+        // allow singleplayer server to use original offsets for collisions
+        if (spServer != null && spServer.isSameThread()) return;
+        // any other caller is assumed to be from rendering
+
+        switch (config.mode) {
+            case NO_ROTATIONS -> cir.setReturnValue(Vec3.ZERO);
+            case SECURE_RANDOM -> posRef.set(BlockPos.of(NoTextureRotations.secureRandom.nextLong()));
+            case RANDOM_OFFSET -> {
+                var chunkPos = ChunkPos.asLong(pos);
+                int offset = NoTextureRotations.randomOffsetByChunkCache.getUnchecked(chunkPos);
+                posRef.set(
+                    new BlockPos((pos.getX() & 15) + offset, pos.getY(), (pos.getZ() & 15) + offset)
+                );
+            }
+            case REPEATING_SECTION -> {
+                posRef.set(new BlockPos(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15));
             }
         }
     }
