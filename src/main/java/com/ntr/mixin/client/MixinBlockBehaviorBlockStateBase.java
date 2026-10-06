@@ -38,7 +38,7 @@ public abstract class MixinBlockBehaviorBlockStateBase {
 
         switch (config.mode) {
             case NO_ROTATIONS -> cir.setReturnValue(Vec3.ZERO);
-            case KEYED_RANDOM -> posRef.set(BlockPos.of(NoTextureRotations.keyedHash().hash(BlockPos.asLong(pos.getX(), 0, pos.getZ()))));
+            case KEYED_RANDOM -> posRef.set(BlockPos.of(NoTextureRotations.keyedHash().hash(BlockPos.asLong(pos.getX() & 255, 0, pos.getZ() & 255))));
         }
     }
 }

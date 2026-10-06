@@ -42,13 +42,7 @@ Compatible with Vanilla MC, Sodium, and custom texture/resource packs
 This mod provides multiple modes to select from:
 
 * No Rotations: All blocks have the same rotation and offset
-* Keyed Random: Securely hashes (SipHash-2-4) position and server identifier data with a secret key (`config/no-texture-rotations.key`)
-
-|                 | visual variation | deterministic    | security issues/notes         |
-|-----------------|------------------|------------------|-------------------------------|
-| no rotations    | none             | yes              | none                          |
-| keyed random    | high             | yes (per key)    | key file must be kept private |
-
+* Keyed Random: Securely hashes (SipHash-2-4) position within 256 block repeating area and server identifier data with a secret key (`config/no-texture-rotations.key`)
 
 ## Configuration
 

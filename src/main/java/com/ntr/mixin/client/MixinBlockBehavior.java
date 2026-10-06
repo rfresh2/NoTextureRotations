@@ -18,7 +18,7 @@ public class MixinBlockBehavior {
         if (config.disableTextureRotations) {
             switch (config.mode) {
                 case NO_ROTATIONS -> cir.setReturnValue(42L);
-                case KEYED_RANDOM -> cir.setReturnValue(NoTextureRotations.keyedHash().hash(pos.asLong()));
+                case KEYED_RANDOM -> cir.setReturnValue(NoTextureRotations.keyedHash().hash(BlockPos.asLong(pos.getX() & 255,  pos.getY(), pos.getZ() & 255)));
             }
         }
     }
